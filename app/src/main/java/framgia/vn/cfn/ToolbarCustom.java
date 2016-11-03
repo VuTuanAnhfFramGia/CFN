@@ -21,7 +21,7 @@ public class ToolbarCustom extends Toolbar {
     private TextView mTxtToolbar;
     private Spinner mSpinner;
     private ViewGroup mViewGroup;
-    private OnItemListenner mOnItemListenner;
+    private OnItemListener mOnItemListener;
 
     public ToolbarCustom(Context context) {
         super(context);
@@ -50,8 +50,8 @@ public class ToolbarCustom extends Toolbar {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (mOnItemListenner != null) {
-                    mOnItemListenner.OnItemSelectedListener(position);
+                if (mOnItemListener != null) {
+                    mOnItemListener.onItemSelectedListener(position);
                 }
             }
 
@@ -82,7 +82,7 @@ public class ToolbarCustom extends Toolbar {
         }
     }
 
-    public void setOnItemSelectListenerSpinner(OnItemListenner listener) {
-        this.mOnItemListenner = listener;
+    public void setOnItemSelectListenerSpinner(OnItemListener listener) {
+        this.mOnItemListener = listener;
     }
 }
