@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#7cafdd</color>
     <color name="colorMain">#f8f8f8</color>
+    <color name="color_default">#f8f8f8</color>
+    <color name="color_background_default">#e7f4ff</color>
+    <color name="color_selected_tab_layout">#dde2df</color>
 </resources>

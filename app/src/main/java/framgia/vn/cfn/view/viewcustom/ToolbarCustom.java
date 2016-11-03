@@ -1,4 +1,4 @@
-package framgia.vn.cfn;
+package framgia.vn.cfn.view.viewcustom;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -11,8 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import static framgia.vn.cfn.Contanst.ID_LANG_EN;
-import static framgia.vn.cfn.Contanst.ID_LANG_JP;
+import framgia.vn.cfn.R;
+import framgia.vn.cfn.controller.listener.OnItemListener;
+import framgia.vn.cfn.model.Constant;
+import framgia.vn.cfn.utils.SettingUtils;
+
+import static framgia.vn.cfn.model.Constant.ID_LANG_EN;
+import static framgia.vn.cfn.model.Constant.ID_LANG_JP;
 
 /**
  * Created by toannguyen201194 on 02/11/2016.
@@ -21,24 +26,25 @@ public class ToolbarCustom extends Toolbar {
     private TextView mTxtToolbar;
     private Spinner mSpinner;
     private ViewGroup mViewGroup;
-    private OnItemListenner mOnItemListenner;
+    private OnItemListener mOnItemListener;
 
     public ToolbarCustom(Context context) {
         super(context);
         initialize();
     }
 
-    public ToolbarCustom(Context context,
-                         @Nullable AttributeSet attrs) {
+    public ToolbarCustom(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }
 
-    public ToolbarCustom(Context context,
-                         @Nullable AttributeSet attrs,
-                         int defStyleAttr) {
+    public ToolbarCustom(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize();
+    }
+
+    public void setOnItemSelectListenerSpinner(OnItemListener listener) {
+        this.mOnItemListener = listener;
     }
 
     private void initialize() {
@@ -50,8 +56,8 @@ public class ToolbarCustom extends Toolbar {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (mOnItemListenner != null) {
-                    mOnItemListenner.OnItemSelectedListener(position);
+                if (mOnItemListener != null) {
+                    mOnItemListener.onItemSelectedListener(position);
                 }
             }
 
@@ -63,7 +69,7 @@ public class ToolbarCustom extends Toolbar {
 
     private void setupSpinner() {
         String[] arr = getResources().getStringArray(R.array.change_language);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout
             .simple_spinner_item, arr);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(arrayAdapter);
@@ -73,16 +79,12 @@ public class ToolbarCustom extends Toolbar {
     private int getCurrent() {
         String lang = SettingUtils.getLanguage();
         switch (lang) {
-            case Contanst.LANG_JP:
+            case Constant.LANG_JP:
                 return ID_LANG_JP;
-            case Contanst.LANG_EN:
+            case Constant.LANG_EN:
                 return ID_LANG_EN;
             default:
                 return ID_LANG_JP;
         }
-    }
-
-    public void setOnItemSelectListenerSpinner(OnItemListenner listener) {
-        this.mOnItemListenner = listener;
     }
 }

@@ -1,4 +1,4 @@
-package framgia.vn.cfn;
+package framgia.vn.cfn.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,22 +11,22 @@ public class SpManager {
     private SharedPreferences.Editor mEditor;
     private SharedPreferences mSettings;
 
-    static SpManager getInstance() {
+    public static SpManager getInstance() {
         if (sInstance == null)
             sInstance = new SpManager();
         return sInstance;
     }
 
-    void init(Context context, String name) {
+    public void init(Context context, String name) {
         mSettings = context.getSharedPreferences(name, Context.MODE_PRIVATE);
         mEditor = mSettings.edit();
     }
 
-    String getString(String key, String defaultValue) {
+    public String getString(String key, String defaultValue) {
         return mSettings.getString(key, defaultValue);
     }
 
-    void putString(String key, String value) {
+    public void putString(String key, String value) {
         mEditor.putString(key, value).commit();
     }
 }

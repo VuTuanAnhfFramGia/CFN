@@ -1,22 +1,26 @@
-package framgia.vn.cfn;
+package framgia.vn.cfn.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import static framgia.vn.cfn.Contanst.ID_LANG_EN;
-import static framgia.vn.cfn.Contanst.ID_LANG_JP;
-import static framgia.vn.cfn.Contanst.LANG_EN;
-import static framgia.vn.cfn.Contanst.LANG_JP;
-import static framgia.vn.cfn.SettingUtils.setLocale;
+import framgia.vn.cfn.R;
+import framgia.vn.cfn.model.Constant;
+import framgia.vn.cfn.utils.SettingUtils;
+import framgia.vn.cfn.utils.SpManager;
+import framgia.vn.cfn.view.viewcustom.ToolbarCustom;
 
-public class LoginActivity extends AppCompatActivity
-    implements View.OnClickListener, OnItemListenner {
-    private ToolbarCustom mToolbar;
+import static framgia.vn.cfn.model.Constant.ID_LANG_EN;
+import static framgia.vn.cfn.model.Constant.ID_LANG_JP;
+import static framgia.vn.cfn.model.Constant.LANG_EN;
+import static framgia.vn.cfn.model.Constant.LANG_JP;
+import static framgia.vn.cfn.utils.SettingUtils.setLocale;
+
+public class LoginActivity extends BaseActivity {
+    private ToolbarCustom mToolbarCustom;
     private EditText mEditUserName, mEditPassword;
     private Button mBtnLogin, mBtnFaceBook, mBtnRegister;
     private TextView mTxtFgPass, mTxtMember, mTxtTitle;
@@ -25,16 +29,16 @@ public class LoginActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SpManager.getInstance().init(getApplication(), Contanst.CONFIG_LANG);
+        SpManager.getInstance().init(getApplication(), Constant.CONFIG_LANG);
         initView();
     }
 
     public void initView() {
-        mToolbar = (ToolbarCustom) findViewById(R.id.toolbar);
-        if (mToolbar != null) {
-            mToolbar.setOnItemSelectListenerSpinner(this);
+        mToolbarCustom = (ToolbarCustom) findViewById(R.id.toolbar);
+        if (mToolbarCustom != null) {
+            mToolbarCustom.setOnItemSelectListenerSpinner(this);
         }
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(mToolbarCustom);
         mEditUserName = (EditText) findViewById(R.id.edit_username);
         mBtnLogin = (Button) findViewById(R.id.button_login);
         mEditPassword = (EditText) findViewById(R.id.edit_password);
@@ -46,7 +50,7 @@ public class LoginActivity extends AppCompatActivity
         mBtnLogin.setOnClickListener(this);
     }
 
-    public void refesh() {
+    public void fresh() {
         mEditUserName.setHint(getString(R.string.username));
         mEditPassword.setHint(getString(R.string.password));
         mBtnLogin.setText(getString(R.string.title_login));
@@ -58,13 +62,18 @@ public class LoginActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_login:
+                startActivity(new Intent(this, TopActivity.class));
+                break;
+        }
     }
 
     @Override
-    public void OnItemSelectedListener(int position) {
+    public void onItemSelectedListener(int position) {
         changeLanguage(position);
-        refesh();
+        fresh();
     }
 
     private void changeLanguage(int language) {

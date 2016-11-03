@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e7f4ff"
-    android:orientation="vertical"
-    tools:context="framgia.vn.cfn.LoginActivity">
+    android:orientation="horizontal"
+    tools:context="framgia.vn.cfn.view.activity.LoginActivity">
 
-    <framgia.vn.cfn.ToolbarCustom
+    <framgia.vn.cfn.view.viewcustom.ToolbarCustom
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
