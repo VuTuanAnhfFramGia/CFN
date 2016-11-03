@@ -1,6 +1,5 @@
 package framgia.vn.cfn;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,7 +14,7 @@ import static framgia.vn.cfn.Contanst.LANG_JP;
 import static framgia.vn.cfn.SettingUtils.setLocale;
 
 public class LoginActivity extends AppCompatActivity
-    implements View.OnClickListener, OnItemListenner {
+    implements View.OnClickListener, OnItemListener {
     private ToolbarCustom mToolbar;
     private EditText mEditUserName, mEditPassword;
     private Button mBtnLogin, mBtnFaceBook, mBtnRegister;
@@ -46,7 +45,7 @@ public class LoginActivity extends AppCompatActivity
         mBtnLogin.setOnClickListener(this);
     }
 
-    public void refesh() {
+    public void fresh() {
         mEditUserName.setHint(getString(R.string.username));
         mEditPassword.setHint(getString(R.string.password));
         mBtnLogin.setText(getString(R.string.title_login));
@@ -62,9 +61,9 @@ public class LoginActivity extends AppCompatActivity
     }
 
     @Override
-    public void OnItemSelectedListener(int position) {
+    public void onItemSelectedListener(int position) {
         changeLanguage(position);
-        refesh();
+        fresh();
     }
 
     private void changeLanguage(int language) {
